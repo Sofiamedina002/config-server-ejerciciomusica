@@ -1,0 +1,19 @@
+server:
+  port: 8080
+cloud:
+  gateway:
+    discovery:
+      locator:
+        enabled: true
+        lower-case-service-id: true
+    routes:
+      - id: musica-service
+        uri: lb://musica-service
+        #uri: http://localhost:8081
+        predicates:
+          - Path=/musica/**
+      - id: playlist-service
+          uri: lb://playlist-service
+          predicates:
+            - Path=/playlist/**
+
